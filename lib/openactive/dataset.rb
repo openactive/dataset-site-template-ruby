@@ -9,7 +9,5 @@ require "openactive/dataset/template_renderer"
 
 module OpenActive
   module Dataset
-    class Error < StandardError; end
-    # Your code goes here...
   end
 end
