@@ -36,9 +36,7 @@ module OpenActive
 
       def data_feed_descriptions
         data_feed_types.map do |description|
-          next description.display_name if description.respond_to?(:display_name)
-
-          description
+          description.respond_to?(:display_name) ? description.display_name : description
         end.uniq
       end
 
