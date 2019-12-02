@@ -61,7 +61,7 @@ module OpenActive
       def description
         "Near real-time availability and rich descriptions relating to the "\
               "#{data_feed_descriptions_sentence} available from "\
-              "#{organisation_name}, published using the OpenActive Modelling Specification 2.0."
+              "#{organisation_name}"
       end
 
       def data_downloads
