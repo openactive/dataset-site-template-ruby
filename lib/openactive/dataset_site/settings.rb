@@ -1,5 +1,5 @@
 module OpenActive
-  module Dataset
+  module DatasetSite
     class Settings
       def initialize(**params)
         params.each do |k, v|
