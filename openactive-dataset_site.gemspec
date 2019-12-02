@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["OpenActive Community"]
   spec.email         = ["hello@openactive.io"]
 
-  spec.summary       = 'Write a short summary, because RubyGems requires one.'
+  spec.summary       = 'Simplifies creation of dataset sites using templates.'
   # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "https://openactive.io"
   spec.license       = "MIT"
