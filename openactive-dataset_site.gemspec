@@ -1,10 +1,10 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "openactive/dataset/version"
+require "openactive/dataset_site/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "openactive-dataset"
-  spec.version       = OpenActive::Dataset::VERSION
+  spec.name          = "openactive-dataset_site"
+  spec.version       = OpenActive::DatasetSite::VERSION
   spec.authors       = ["OpenActive Community"]
   spec.email         = ["hello@openactive.io"]
 

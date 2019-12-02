@@ -1,7 +1,7 @@
 require 'mustache'
 
 module OpenActive
-  module Dataset
+  module DatasetSite
     class TemplateRenderer < Mustache
       self.template_file = "#{__dir__}/datasetsite.mustache"
 
