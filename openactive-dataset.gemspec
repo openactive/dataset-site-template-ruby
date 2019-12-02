@@ -5,8 +5,8 @@ require "openactive/dataset/version"
 Gem::Specification.new do |spec|
   spec.name          = "openactive-dataset"
   spec.version       = OpenActive::Dataset::VERSION
-  spec.authors       = ["Joe Carter"]
-  spec.email         = ["joe@simpleweb.co.uk"]
+  spec.authors       = ["OpenActive Community"]
+  spec.email         = ["hello@openactive.io"]
 
   spec.summary       = 'Write a short summary, because RubyGems requires one.'
   # spec.description   = %q{TODO: Write a longer description or delete this line.}
