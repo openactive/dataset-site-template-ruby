@@ -35,7 +35,7 @@ puts renderer.render
 ```
 
 Where `settings` could be defined like the following (as an example):
-```php
+```ruby
 settings = OpenActive::DatasetSite::Settings.new(
     open_data_feed_base_url: "https://customer.example.com/feed/",
     dataset_site_url: "https://halo-odi.legendonlineservices.co.uk/openactive/",
