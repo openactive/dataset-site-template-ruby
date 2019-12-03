@@ -1,5 +1,5 @@
 module OpenActive
-  module Dataset
+  module DatasetSite
     class FeedType < TypesafeEnum::Base
       new :COURSE, "Course" do
         @name = "Course"

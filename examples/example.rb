@@ -1,16 +1,16 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require "openactive/dataset"
+require "openactive/dataset_site"
 
 feed_types = [
-  OpenActive::Dataset::FeedType::FACILITY_USE,
-  OpenActive::Dataset::FeedType::SCHEDULED_SESSION,
-  OpenActive::Dataset::FeedType::SESSION_SERIES,
-  OpenActive::Dataset::FeedType::SLOT,
+  OpenActive::DatasetSite::FeedType::FACILITY_USE,
+  OpenActive::DatasetSite::FeedType::SCHEDULED_SESSION,
+  OpenActive::DatasetSite::FeedType::SESSION_SERIES,
+  OpenActive::DatasetSite::FeedType::SLOT,
 ]
 
-settings = OpenActive::Dataset::Settings.new(
+settings = OpenActive::DatasetSite::Settings.new(
   open_data_feed_base_url: "http://example.com/feed/",
   dataset_site_url: "http://example.com/dataset/",
   dataset_discussion_url: "https://github.com/simpleweb/sw-oa-php-test-site",
@@ -28,6 +28,6 @@ settings = OpenActive::Dataset::Settings.new(
   data_feed_types: feed_types,
 )
 
-renderer = OpenActive::Dataset::TemplateRenderer.new(settings)
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings)
 
 puts renderer.render
