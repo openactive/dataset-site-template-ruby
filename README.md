@@ -10,7 +10,7 @@ For comparison, see the [.NET](https://github.com/openactive/dataset-site-templa
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'openactive-dataset'
+gem 'openactive-dataset_site'
 ```
 
 And then execute:
@@ -19,7 +19,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install openactive-dataset
+    $ gem install openactive-dataset_site
     
 
 ## Usage
