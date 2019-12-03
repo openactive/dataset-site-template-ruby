@@ -14,7 +14,7 @@ module OpenActive
       end
 
       def json
-        dataset.to_json
+        dataset.to_json(schema: true)
       end
 
       def method_missing(orig_method_name, *args)
