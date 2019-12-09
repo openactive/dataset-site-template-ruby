@@ -26,7 +26,7 @@ settings = OpenActive::DatasetSite::Settings.new(
   background_image_url: "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
   date_first_published: "2019-11-05", # remember, remember the fifth of November...
   data_feed_types: feed_types,
-  )
+)
 
 dataset = settings.to_dataset
 
