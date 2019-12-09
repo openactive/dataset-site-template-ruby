@@ -62,6 +62,140 @@ settings = OpenActive::DatasetSite::Settings.new(
 )
 ```
 
+
+### Feed-level customisation
+If you need to do feed specific overrides, then you may do this by overriding the method.
+```ruby
+settings = Class.new(OpenActive::DatasetSite::Settings) do
+  def data_download(feed_type)
+    val = super(feed_type)
+
+    case feed_type
+    when OpenActive::DatasetSite::FeedType::SESSION_SERIES
+      val.content_url = open_data_feed_base_url + "session_series"
+    end
+
+    val
+  end
+end.new(
+  data_feed_types: [
+    OpenActive::DatasetSite::FeedType::FACILITY_USE,
+    OpenActive::DatasetSite::FeedType::SCHEDULED_SESSION,
+    OpenActive::DatasetSite::FeedType::SESSION_SERIES,
+    OpenActive::DatasetSite::FeedType::SLOT,
+  ],
+  # rest of your settings here.
+)
+```
+
+To match the PHP/.NET usage, you may alternatively use this approach, however it's less advised as there are more details to get right (and it risks a mismatch between the downloads and the advertised feed types):
+```ruby
+settings = OpenActive::DatasetSite::Settings.new(
+    # your settings here,
+    data_feed_types: [
+      OpenActive::DatasetSite::FeedType::SESSION_SERIES,
+    ],
+    data_downloads: [
+        OpenActive::Models::DataDownload.new(
+          name: "SessionSeries",
+          additional_type: "https://openactive.io/SessionSeries",
+          encoding_format:  OpenActive::DatasetSite::Meta.RPDE_MEDIA_TYPE,
+          content_url: open_data_feed_base_url + "session-series",
+        )
+    ]
+)
+```
+
+### Dataset
+```ruby
+dataset = OpenActive::Models::Dataset.new(
+  id: "http://example.com/dataset/",
+  description:
+    "Near real-time availability and rich descriptions relating to the facilities and sessions available from Simpleweb",
+  url: "http://example.com/dataset/",
+  dateModified: "2019-12-09T15:36:15+00:00",
+  keywords:
+    ["Facilities",
+     "Sessions",
+     "Activities",
+     "Sports",
+     "Physical Activity",
+     "OpenActive"],
+  schemaVersion: "https://www.openactive.io/modelling-opportunity-data/2.0/",
+  license: "https://creativecommons.org/licenses/by/4.0/",
+  publisher:
+    OpenActive::Models::Organization.new(
+      name: "Simpleweb",
+      description:
+       "Simpleweb is a purpose driven software company that specialises in new technologies, product development, and human interaction.",
+      url: "https://www.simpleweb.co.uk/",
+      legalName: "Simpleweb Ltd",
+      logo:
+       OpenActive::Models::ImageObject.new(
+         url:
+           "https://simpleweb.co.uk/wp-content/uploads/2015/07/facebook-default.png",
+       ),
+      email: "spam@simpleweb.co.uk",
+    ),
+  discussionUrl: "https://github.com/simpleweb/sw-oa-php-test-site",
+  datePublished: "2019-11-05T00:00:00+00:00",
+  inLanguage: ["en-GB"],
+  distribution:
+    [OpenActive::Models::DataDownload.new(
+      name: "FacilityUse",
+      additionalType: "https://openactive.io/FacilityUse",
+      encodingFormat: "application/vnd.openactive.rpde+json; version=1",
+      contentUrl: "http://example.com/feed/facility-uses",
+    ),
+     OpenActive::Models::DataDownload.new(
+       name: "ScheduledSession",
+       additionalType: "https://openactive.io/ScheduledSession",
+       encodingFormat: "application/vnd.openactive.rpde+json; version=1",
+       contentUrl: "http://example.com/feed/scheduled-sessions",
+     ),
+     OpenActive::Models::DataDownload.new(
+       name: "SessionSeries",
+       additionalType: "https://openactive.io/SessionSeries",
+       encodingFormat: "application/vnd.openactive.rpde+json; version=1",
+       contentUrl: "http://example.com/feed/session_series",
+     ),
+     OpenActive::Models::DataDownload.new(
+       name: "Slot",
+       additionalType: "https://openactive.io/Slot",
+       encodingFormat: "application/vnd.openactive.rpde+json; version=1",
+       contentUrl: "http://example.com/feed/slots",
+     )],
+  backgroundImage:
+    OpenActive::Models::ImageObject.new(
+      url:
+        "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
+    ),
+  documentation: "https://developer.openactive.io/",
+  name: "Simpleweb Facilities and Sessions",
+)
+
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)
+
+puts renderer.render
+```
+
+### Dataset patching
+The dataset generation should already be good for most purposes, if needing to change just a couple of fields then
+you may be better of patching just those fields.
+```ruby
+settings = OpenActive::DatasetSite::Settings.new(
+  # your settings here
+)
+
+dataset = settings.to_dataset
+
+dataset.description = "Some better non-generated description here."
+
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)
+
+puts renderer.render
+```
+
 ### API
 
 #### OpenActive::DatasetSite::Settings
