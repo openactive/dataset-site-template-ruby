@@ -3,6 +3,8 @@ require 'mustache'
 module OpenActive
   module DatasetSite
     class TemplateRenderer < Mustache
+      attr_reader :settings
+
       self.template_file = "#{__dir__}/datasetsite.mustache"
 
       def initialize(settings)
