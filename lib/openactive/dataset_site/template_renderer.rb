@@ -10,9 +10,9 @@ module OpenActive
       end
 
       def dataset
-        return @settings if settings.is_a?(OpenActive::Models::Dataset)
+        return settings if settings.is_a?(OpenActive::Models::Dataset)
 
-        @dataset ||= @settings.to_dataset
+        @dataset ||= settings.to_dataset
       end
 
       def json
