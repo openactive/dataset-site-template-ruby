@@ -2,6 +2,8 @@ module OpenActive
   module DatasetSite
     class Settings
       def initialize(**params)
+        super()
+
         params.each do |k, v|
           setter_method = "#{k}="
 
@@ -33,6 +35,7 @@ module OpenActive
       attr_accessor :platform_software_version
 
       attr_accessor :data_feed_types
+      attr_accessor :data_downloads
 
       def data_feed_descriptions
         data_feed_types.map do |description|
@@ -48,6 +51,7 @@ module OpenActive
         data_feed_descriptions.to_sentence.downcase
       end
 
+      # @return [Array<String>] An array of keywords.
       def keywords
         [
           *data_feed_descriptions,
@@ -64,15 +68,30 @@ module OpenActive
               "#{organisation_name}"
       end
 
+      # @return [OpenActive::Models::DataDownload] A DataDownload object.
+      def data_download(feed_type)
+        OpenActive::Models::DataDownload.new(
+          name: feed_type.name,
+          additional_type: feed_type.same_as,
+          encoding_format: OpenActive::DatasetSite::Meta::RPDE_MEDIA_TYPE,
+          content_url: open_data_feed_base_url + feed_type.default_feed_path,
+        )
+      end
+
+      # @return [Array<OpenActive::Models::DataDownload>] An array of DataDownload objects.
       def data_downloads
-        data_feed_types.map do |feed_type|
-          OpenActive::Models::DataDownload.new(
-            name: feed_type.name,
-            additional_type: feed_type.same_as,
-            encoding_format: "application/vnd.openactive.rpde+json; version=1",
-            content_url: open_data_feed_base_url + feed_type.default_feed_path,
-          )
-        end
+        @data_downloads || data_feed_types.map { |feed_type| data_download(feed_type) }
+      end
+
+      # @return [OpenActive::Models::BookingService, nil]
+      def booking_service
+        return unless platform_name && !platform_name.empty?
+
+        OpenActive::Models::BookingService.new(
+          name: platform_name,
+          url: platform_url,
+          software_version: platform_software_version,
+        )
       end
 
       def to_dataset # rubocop:disable Metrics/MethodLength
@@ -105,12 +124,8 @@ module OpenActive
           date_published: date_first_published,
         )
 
-        if platform_name && !platform_name.empty?
-          dataset.booking_service = OpenActive::Models::BookingService.new(
-            name: platform_name,
-            url: platform_url,
-            software_version: platform_software_version,
-          )
+        if (booking_service_val = booking_service)
+          dataset.booking_service = booking_service_val
         end
 
         dataset
