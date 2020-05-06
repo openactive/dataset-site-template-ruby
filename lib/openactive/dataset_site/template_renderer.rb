@@ -3,6 +3,8 @@ require 'mustache'
 module OpenActive
   module DatasetSite
     class TemplateRenderer < Mustache
+      attr_reader :settings
+
       self.template_file = "#{__dir__}/datasetsite.mustache"
 
       def initialize(settings)
@@ -10,9 +12,9 @@ module OpenActive
       end
 
       def dataset
-        return @settings if @settings.is_a?(OpenActive::Models::Dataset)
+        return settings if settings.is_a?(OpenActive::Models::Dataset)
 
-        @dataset ||= @settings.to_dataset
+        @dataset ||= settings.to_dataset
       end
 
       def json
