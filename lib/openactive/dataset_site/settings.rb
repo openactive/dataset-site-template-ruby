@@ -37,6 +37,14 @@ module OpenActive
       attr_accessor :data_feed_types
       attr_accessor :data_downloads
 
+      # **** OPEN BOOKING ****
+
+      attr_accessor :open_booking_api_base_url
+      attr_accessor :open_booking_api_documentation_url
+      attr_accessor :open_booking_api_terms_service_url
+      attr_accessor :open_booking_api_registration_url
+      attr_accessor :open_booking_api_authentication_authority
+
       def data_feed_descriptions
         data_feed_types.map do |description|
           description.respond_to?(:display_name) ? description.display_name : description
@@ -94,6 +102,20 @@ module OpenActive
         )
       end
 
+      def access_service
+        OpenActive::Models::WebAPI.new(
+          name: 'Open Booking API',
+          description: "API that allows for seamless booking experiences to be created for #{data_feed_descriptions.to_sentence.downcase} available from #{organisation_name}",
+          documentation: open_booking_api_documentation_url,
+          terms_of_service: open_booking_api_terms_service_url,
+          endpoint_url: open_booking_api_base_url,
+          authentication_authority: open_booking_api_authentication_authority,
+          conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
+          endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
+          landing_page: open_booking_api_registration_url
+        )
+      end
+
       def to_dataset # rubocop:disable Metrics/MethodLength
         dataset = OpenActive::Models::Dataset.new(
           id: dataset_site_url,
@@ -122,6 +144,7 @@ module OpenActive
           ),
           distribution: data_downloads,
           date_published: date_first_published,
+          access_service: access_service,
         )
 
         if (booking_service_val = booking_service)
