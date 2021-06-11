@@ -105,7 +105,7 @@ module OpenActive
       def access_service
         OpenActive::Models::WebAPI.new(
           name: 'Open Booking API',
-          description: "API that allows for seamless booking experiences to be created for #{data_feed_descriptions.to_sentence} available from #{organisation_name}".downcase,
+          description: "API that allows for seamless booking experiences to be created for #{data_feed_descriptions.to_sentence.downcase} available from #{organisation_name}",
           documentation: open_booking_api_documentation_url,
           terms_of_service: open_booking_api_terms_service_url,
           endpoint_url: open_booking_api_base_url,
