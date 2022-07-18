@@ -17,7 +17,7 @@ module OpenActive
         @dataset ||= settings.to_dataset
       end
 
-      def jsonld
+      def json
         dataset.to_json(schema: true, pretty: true)
       end
 
