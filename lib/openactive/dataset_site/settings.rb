@@ -43,7 +43,7 @@ module OpenActive
       attr_accessor :open_booking_api_documentation_url
       attr_accessor :open_booking_api_terms_service_url
       attr_accessor :open_booking_api_registration_url
-      attr_accessor :open_booking_api_authentication_authority
+      attr_accessor :open_booking_api_authentication_authority_url
 
       def data_feed_descriptions
         data_feed_types.map do |description|
@@ -117,7 +117,7 @@ module OpenActive
           documentation: open_booking_api_documentation_url,
           terms_of_service: open_booking_api_terms_service_url,
           endpoint_url: open_booking_api_base_url,
-          authentication_authority: open_booking_api_authentication_authority,
+          authentication_authority: open_booking_api_authentication_authority_url,
           conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
           endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
           landing_page: open_booking_api_registration_url
