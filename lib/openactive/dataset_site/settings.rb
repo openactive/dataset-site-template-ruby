@@ -103,6 +103,8 @@ module OpenActive
       end
 
       def access_service
+        return unless open_booking_api_base_url && !open_booking_api_base_url.empty?
+        
         OpenActive::Models::WebAPI.new(
           name: 'Open Booking API',
           description: "API that allows for seamless booking experiences to be created for #{data_feed_descriptions.to_sentence.downcase} available from #{organisation_name}",
