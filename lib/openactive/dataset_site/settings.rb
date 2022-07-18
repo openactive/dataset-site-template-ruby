@@ -105,10 +105,15 @@ module OpenActive
       def booking_service
         return unless (platform_name && !platform_name.empty?) || (test_suite_certificate_url && !test_suite_certificate_url.empty?)
 
-        booking_service = OpenActive::Models::BookingService.new(
-          name: platform_name,
-          url: platform_url,
-        )
+        booking_service = OpenActive::Models::BookingService.new()
+
+        if (platform_name_val = platform_name)
+          booking_service.platform_name = platform_name_val
+        end
+
+        if (platform_url_val = platform_url)
+          booking_service.platform_url = platform_url_val
+        end
 
         if (platform_software_version_val = platform_software_version)
           booking_service.platform_software_version = platform_software_version_val
