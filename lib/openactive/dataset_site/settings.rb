@@ -144,11 +144,14 @@ module OpenActive
           ),
           distribution: data_downloads,
           date_published: date_first_published,
-          access_service: access_service,
         )
 
         if (booking_service_val = booking_service)
           dataset.booking_service = booking_service_val
+        end
+
+        if (access_service_val = access_service)
+          dataset.access_service = access_service_val
         end
 
         dataset
