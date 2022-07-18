@@ -43,6 +43,12 @@ jobs:
     - name: Output rendering dataset_patch as an artifact
       run: ruby examples/dataset_patch.rb > ./output/dataset_patch.html
 
+    - name: Output rendering specific_feed_override_example as an artifact
+      run: ruby examples/specific_feed_override_example.rb > ./output/specific_feed_override_example.html
+
+    - name: Output rendering specific_feed_override_example2 as an artifact
+      run: ruby examples/specific_feed_override_example2.rb > ./output/specific_feed_override_example2.html
+
     - name: Upload example renderings
       uses: actions/upload-artifact@v2
       if: ${{ success() || failure() }}

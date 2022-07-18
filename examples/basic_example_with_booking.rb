@@ -30,6 +30,7 @@ settings = OpenActive::DatasetSite::Settings.new(
   open_booking_api_documentation_url: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
   open_booking_api_terms_service_url: "https://example.com/api-terms-page",
   open_booking_api_registration_url: "https://example.com/api-landing-page",
+  test_suite_certificate_url: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
   data_feed_types: feed_types,
 )
 
