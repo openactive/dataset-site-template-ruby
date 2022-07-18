@@ -74,8 +74,14 @@ module OpenActive
         ]
       end
 
-      def description
+      def dataset_description
         "Near real-time availability and rich descriptions relating to the "\
+              "#{data_feed_descriptions_sentence} available from "\
+              "#{organisation_name}"
+      end
+
+      def webapi_description
+        "API that allows for seamless booking experiences to be created for  "\
               "#{data_feed_descriptions_sentence} available from "\
               "#{organisation_name}"
       end
@@ -108,9 +114,11 @@ module OpenActive
       end
 
       def access_service
+        return unless open_booking_api_base_url && !open_booking_api_base_url.empty?
+        
         OpenActive::Models::WebAPI.new(
           name: 'Open Booking API',
-          description: "API that allows for seamless booking experiences to be created for #{data_feed_descriptions.to_sentence.downcase} available from #{organisation_name}",
+          description: webapi_description,
           documentation: open_booking_api_documentation_url,
           terms_of_service: open_booking_api_terms_service_url,
           endpoint_url: open_booking_api_base_url,
@@ -126,7 +134,7 @@ module OpenActive
           id: dataset_site_url,
           url: dataset_site_url,
           name: name,
-          description: description,
+          description: dataset_description,
           keywords: keywords,
           license: "https://creativecommons.org/licenses/by/4.0/",
           discussion_url: dataset_discussion_url,
@@ -149,11 +157,14 @@ module OpenActive
           ),
           distribution: data_downloads,
           date_published: date_first_published,
-          access_service: access_service,
         )
 
         if (booking_service_val = booking_service)
           dataset.booking_service = booking_service_val
+        end
+
+        if (access_service_val = access_service)
+          dataset.access_service = access_service_val
         end
 
         dataset
