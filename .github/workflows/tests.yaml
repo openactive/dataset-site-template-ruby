@@ -37,7 +37,7 @@ jobs:
     - name: Output rendering dataset_patch as an artifact
       run: ruby examples/dataset_patch.rb > ./output/dataset_patch.html
 
-    - name: Upload example rendering
+    - name: Upload example renderings
       uses: actions/upload-artifact@v2
       if: ${{ success() || failure() }}
       with:
