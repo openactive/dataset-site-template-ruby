@@ -108,18 +108,18 @@ module OpenActive
         booking_service = OpenActive::Models::BookingService.new()
 
         if (platform_name_val = platform_name)
-          booking_service.platform_name = platform_name_val
+          booking_service.name = platform_name_val
         end
 
         if (platform_url_val = platform_url)
-          booking_service.platform_url = platform_url_val
+          booking_service.url = platform_url_val
         end
 
         if (platform_software_version_val = platform_software_version)
-          booking_service.platform_software_version = platform_software_version_val
+          booking_service.software_version = platform_software_version_val
         end
 
-        if (has_credential_val = has_credential)
+        if (has_credential_val = test_suite_certificate_url)
           booking_service.has_credential = has_credential_val
         end
 
