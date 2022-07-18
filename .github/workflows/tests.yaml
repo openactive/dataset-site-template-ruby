@@ -24,3 +24,22 @@ jobs:
 
     - name: Run tests
       run: bundle exec rspec
+
+    - name: Create output directory
+      run: mkdir -p ./output/
+
+    - name: Output rendering basic_example as an artifact
+      run: ruby examples/basic_example.rb > ./output/basic_example.html
+
+    - name: Output rendering dataset_example as an artifact
+      run: ruby examples/dataset_example.rb > ./output/dataset_example.html
+
+    - name: Output rendering dataset_patch as an artifact
+      run: ruby examples/dataset_patch.rb > ./output/dataset_patch.html
+
+    - name: Upload example renderings
+      uses: actions/upload-artifact@v2
+      if: ${{ success() || failure() }}
+      with:
+        name: example-rendering-ruby-${{ matrix.ruby-version }}
+        path: ./output/
