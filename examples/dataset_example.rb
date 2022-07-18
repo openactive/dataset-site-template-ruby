@@ -5,9 +5,21 @@ require "openactive/dataset_site"
 
 dataset = OpenActive::Models::Dataset.new(
   id: "http://example.com/dataset/",
+  url: "http://example.com/dataset/",
   description:
     "Near real-time availability and rich descriptions relating to the facilities and sessions available from Simpleweb",
-  url: "http://example.com/dataset/",
+  access_service:
+    OpenActive::Models::WebAPI.new(
+      name: 'Open Booking API',
+      description: "API that allows for seamless booking experiences to be created for facilities and sessions available from Simpleweb",
+      documentation: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
+      terms_of_service: "https://example.com/api-terms-page",
+      endpoint_url: "https://reference-implementation.openactive.io/api/openbooking",
+      authentication_authority: "https://auth.reference-implementation.openactive.io",
+      conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
+      endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
+      landing_page: "https://example.com/api-landing-page"
+    ),
   date_modified: "2019-12-09T15:36:15+00:00",
   keywords:
     ["Facilities",
@@ -65,8 +77,14 @@ dataset = OpenActive::Models::Dataset.new(
       url:
         "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
     ),
-  documentation: "https://developer.openactive.io/",
+  documentation: "https://permalink.openactive.io/dataset-site/open-data-documentation",
   name: "Simpleweb Facilities and Sessions",
+  booking_service:
+    OpenActive::Models::BookingService.new(
+      name: "SimpleWeb Booking",
+      url: "https://www.example.com/",
+      has_credential: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
+    ),
 )
 
 renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)

@@ -43,7 +43,11 @@ module OpenActive
       attr_accessor :open_booking_api_documentation_url
       attr_accessor :open_booking_api_terms_service_url
       attr_accessor :open_booking_api_registration_url
-      attr_accessor :open_booking_api_authentication_authority
+      attr_accessor :open_booking_api_authentication_authority_url
+
+      # **** TEST SUITE CERTIFICATE ****
+
+      attr_accessor :test_suite_certificate_url
 
       def data_feed_descriptions
         data_feed_types.map do |description|
@@ -93,12 +97,13 @@ module OpenActive
 
       # @return [OpenActive::Models::BookingService, nil]
       def booking_service
-        return unless platform_name && !platform_name.empty?
+        return unless (platform_name && !platform_name.empty?) || (test_suite_certificate_url && !test_suite_certificate_url.empty?)
 
         OpenActive::Models::BookingService.new(
           name: platform_name,
           url: platform_url,
           software_version: platform_software_version,
+          has_credential: test_suite_certificate_url
         )
       end
 
@@ -109,7 +114,7 @@ module OpenActive
           documentation: open_booking_api_documentation_url,
           terms_of_service: open_booking_api_terms_service_url,
           endpoint_url: open_booking_api_base_url,
-          authentication_authority: open_booking_api_authentication_authority,
+          authentication_authority: open_booking_api_authentication_authority_url,
           conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
           endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
           landing_page: open_booking_api_registration_url

@@ -14,7 +14,7 @@ settings = OpenActive::DatasetSite::Settings.new(
   open_data_feed_base_url: "http://example.com/feed/",
   dataset_site_url: "http://example.com/dataset/",
   dataset_discussion_url: "https://github.com/simpleweb/sw-oa-php-test-site",
-  dataset_documentation_url: "https://developer.openactive.io/",
+  dataset_documentation_url: "https://permalink.openactive.io/dataset-site/open-data-documentation",
   dataset_languages: ["en-GB"],
   organisation_name: "Simpleweb",
   organisation_url: "https://www.simpleweb.co.uk/",
@@ -24,7 +24,13 @@ settings = OpenActive::DatasetSite::Settings.new(
   organisation_logo_url: "https://simpleweb.co.uk/wp-content/uploads/2015/07/facebook-default.png",
   organisation_email: "spam@simpleweb.co.uk",
   background_image_url: "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
-  date_first_published: "2019-11-05", # remember, remember the fifth of November...
+  date_first_published: "2019-11-05",
+  open_booking_api_base_url: "https://reference-implementation.openactive.io/api/openbooking",
+  open_booking_api_authentication_authority_url: "https://auth.reference-implementation.openactive.io",
+  open_booking_api_documentation_url: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
+  open_booking_api_terms_service_url: "https://example.com/api-terms-page",
+  open_booking_api_registration_url: "https://example.com/api-landing-page",
+  test_suite_certificate_url: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
   data_feed_types: feed_types,
 )
 
