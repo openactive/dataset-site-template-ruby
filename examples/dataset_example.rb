@@ -5,9 +5,9 @@ require "openactive/dataset_site"
 
 dataset = OpenActive::Models::Dataset.new(
   id: "http://example.com/dataset/",
+  url: "http://example.com/dataset/",
   description:
     "Near real-time availability and rich descriptions relating to the facilities and sessions available from Simpleweb",
-  url: "http://example.com/dataset/",
   date_modified: "2019-12-09T15:36:15+00:00",
   keywords:
     ["Facilities",
@@ -65,8 +65,13 @@ dataset = OpenActive::Models::Dataset.new(
       url:
         "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
     ),
-  documentation: "https://developer.openactive.io/",
+  documentation: "https://permalink.openactive.io/dataset-site/open-data-documentation",
   name: "Simpleweb Facilities and Sessions",
+  booking_service:
+    OpenActive::Models::BookingService.new(
+      name: "SimpleWeb Booking",
+      url: "https://www.example.com/",
+    ),
 )
 
 renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)

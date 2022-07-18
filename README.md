@@ -40,7 +40,7 @@ settings = OpenActive::DatasetSite::Settings.new(
     open_data_feed_base_url: "https://customer.example.com/feed/",
     dataset_site_url: "https://halo-odi.legendonlineservices.co.uk/openactive/",
     dataset_discussion_url: "https://github.com/gll-better/opendata",
-    dataset_documentation_url: "https://docs.acmebooker.example.com/",
+    dataset_documentation_url: "https://permalink.openactive.io/dataset-site/open-data-documentation",
     dataset_languages: ["en-GB"],
     organisation_name: "Better",
     organisation_url: "https://www.better.org.uk/",
@@ -53,6 +53,12 @@ settings = OpenActive::DatasetSite::Settings.new(
     platform_software_version: "2.0",
     background_image_url: "https://data.better.org.uk/images/bg.jpg",
     date_first_published: "2019-10-28",
+    open_booking_api_base_url: "https://reference-implementation.openactive.io/api/openbooking",
+    open_booking_api_authentication_authority_url: "https://auth.reference-implementation.openactive.io",
+    open_booking_api_documentation_url: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
+    open_booking_api_terms_service_url: "https://example.com/api-terms-page",
+    open_booking_api_registration_url: "https://example.com/api-landing-page",
+    test_suite_certificate_url: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
     data_feed_types: [
       OpenActive::DatasetSite::FeedType::FACILITY_USE,
       OpenActive::DatasetSite::FeedType::SCHEDULED_SESSION,
@@ -110,9 +116,21 @@ settings = OpenActive::DatasetSite::Settings.new(
 ```ruby
 dataset = OpenActive::Models::Dataset.new(
   id: "http://example.com/dataset/",
+  url: "http://example.com/dataset/",
   description:
     "Near real-time availability and rich descriptions relating to the facilities and sessions available from Simpleweb",
-  url: "http://example.com/dataset/",
+  access_service:
+    OpenActive::Models::WebAPI.new(
+      name: 'Open Booking API',
+      description: "API that allows for seamless booking experiences to be created for facilities and sessions available from Simpleweb",
+      documentation: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
+      terms_of_service: "https://example.com/api-terms-page",
+      endpoint_url: "https://reference-implementation.openactive.io/api/openbooking",
+      authentication_authority: "https://auth.reference-implementation.openactive.io",
+      conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
+      endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
+      landing_page: "https://example.com/api-landing-page"
+    ),
   dateModified: "2019-12-09T15:36:15+00:00",
   keywords:
     ["Facilities",
@@ -170,8 +188,14 @@ dataset = OpenActive::Models::Dataset.new(
       url:
         "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
     ),
-  documentation: "https://developer.openactive.io/",
+  documentation: "https://permalink.openactive.io/dataset-site/open-data-documentation",
   name: "Simpleweb Facilities and Sessions",
+  booking_service:
+    OpenActive::Models::BookingService.new(
+      name: "SimpleWeb Booking",
+      url: "https://www.example.com/",
+      has_credential: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
+    )
 )
 
 renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)
@@ -203,25 +227,31 @@ Accepts a config hash containing the following keys:
 
 ##### Settings
 
-| Key                                     | Type        | Description |
-| --------------------------------------- | ----------- | ----------- |
-| `open_data_feed_base_url`               | `string`    | The the base URL for the open data feeds |
-| `dataset_site_url`                      | `string`    | The URL where this dataset site is displayed (the page's own URL) |
-| `dataset_discussion_url`                | `string`    | The GitHub issues page for the dataset |
-| `dataset_documentation_url`             | `string`    | Any documentation specific to the dataset. Defaults to https://developer.openactive.io/ if not provided, which should be used if no documentation is available. |
-| `dataset_languages`                     | `string[]`  | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to `array("en-GB")`. |
-| `organisation_name`                     | `string`    | The publishing organisation's name |
-| `organisation_url`                      | `string`    | The publishing organisation's URL |
-| `organisation_legal_entity`             | `string`    | The legal name of the publishing organisation of this dataset |
-| `organisation_plain_text_description`   | `string`    | A plain text description of this organisation |
-| `organisation_logo_url`                 | `string`    | An image URL of the publishing organisation's logo, ideally in PNG format |
-| `organisation_email`                    | `string`    | The contact email of the publishing organisation of this dataset |
-| `platform_name`                         | `string`    | The software platform's name. Only set this if different from the publishing organisation, otherwise leave as null to exclude platform metadata. |
-| `platform_url`                          | `string`    | The software platform's website |
-| `platform_software_version`             | `string`    | The software platform's software version |
-| `background_image_url`                  | `string`    | The background image to show on the Dataset Site page |
-| `date_first_published`                  | `string`    | The date the dataset was first published |
-| `data_feed_types`                       | `FeedType[]`| A list of supported DataFeed types |
+| Key                                             | Type        | Description |
+| ----------------------------------------------- | ----------- | ----------- |
+| `open_data_feed_base_url`                       | `string`    | The the base URL for the open data feeds |
+| `dataset_site_url`                              | `string`    | The URL where this dataset site is displayed (the page's own URL) |
+| `dataset_discussion_url`                        | `string`    | The GitHub issues page for the dataset |
+| `dataset_documentation_url`                     | `string`    | Any documentation specific to the dataset. Defaults to https://permalink.openactive.io/dataset-site/open-data-documentation if not provided, which should be used if no documentation is available. |
+| `dataset_languages`                             | `string[]`  | The languages available in the dataset, following the IETF BCP 47 standard. Defaults to `array("en-GB")`. |
+| `organisation_name`                             | `string`    | The publishing organisation's name |
+| `organisation_url`                              | `string`    | The publishing organisation's URL |
+| `organisation_legal_entity`                     | `string`    | The legal name of the publishing organisation of this dataset |
+| `organisation_plain_text_description`           | `string`    | A plain text description of this organisation |
+| `organisation_logo_url`                         | `string`    | An image URL of the publishing organisation's logo, ideally in PNG format |
+| `organisation_email`                            | `string`    | The contact email of the publishing organisation of this dataset |
+| `platform_name`                                 | `string`    | The software platform's name. Only set this if different from the publishing organisation, otherwise leave as null to exclude platform metadata. |
+| `platform_url`                                  | `string`    | The software platform's website |
+| `platform_software_version`                     | `string`    | The software platform's software version |
+| `background_image_url`                          | `string`    | The background image to show on the Dataset Site page |
+| `date_first_published`                          | `string`    | The date the dataset was first published |
+| `open_booking_api_base_url`                     | `string`    | The Base URI of this implementation of the Open Booking API |
+| `open_booking_api_authentication_authority_url` | `string`    | The location of the OpenID Provider that must be used to access the API |
+| `open_booking_api_documentation_url`            | `string`    | The URL of documentation related to how to use the Open Booking API. Defaults to https://permalink.openactive.io/dataset-site/open-booking-api-documentation if not provided, which should be used if no system-specific documentation is available. |
+| `open_booking_api_terms_service_url`            | `string`    | The URL of terms of service related to the use of this API |
+| `open_booking_api_registration_url`             | `string`    | The URL of a web page that the Broker may use to obtain access to the API, e.g. via a web form |
+| `test_suite_certificate_url`                    | `string`    | The URL of the OpenActive Test Suite certificate for this booking system |
+| `data_feed_types`                               | `FeedType[]`| A list of supported DataFeed types |
 
 And `data_feed_types` must be an array of `FeedType` constants, which auto-generates the metadata associated which each feed using best-practice values. See [available types](#feedtype)
 
