@@ -5,10 +5,14 @@ module OpenActive
     class TemplateRenderer < Mustache
       attr_reader :settings
 
-      self.template_file = "#{__dir__}/datasetsite.mustache"
-
-      def initialize(settings)
+      def initialize(settings, static_assets_path_url = nil)
         @settings = settings
+        if static_assets_path_url.nil?
+          @template_file =  "#{__dir__}/datasetsite-csp.mustache"
+          @staticAssetsPathUrl = static_assets_path_url
+        else
+          @template_file =  "#{__dir__}/datasetsite.mustache"
+
       end
 
       def dataset
