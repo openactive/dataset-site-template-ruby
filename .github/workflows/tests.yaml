@@ -37,6 +37,9 @@ jobs:
     - name: Output rendering dataset_example as an artifact
       run: ruby examples/dataset_example.rb > ./output/dataset_example.html
 
+    - name: Output rendering dataset_example_with_booking as an artifact
+      run: ruby examples/dataset_example_with_booking.rb > ./output/dataset_example_with_booking.html
+
     - name: Output rendering dataset_patch as an artifact
       run: ruby examples/dataset_patch.rb > ./output/dataset_patch.html
 
