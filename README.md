@@ -289,3 +289,9 @@ A class containing the supported distribution types:
 | `SCHEDULED_SESSION`       | `ScheduledSession`      |
 | `SESSION_SERIES`          | `SessionSeries`         |
 | `SLOT`                    | `Slot`                  |
+
+## Contribution
+
+### Release
+
+Major version numbers of this library should match those of the `dataset-site-template` on which this library depends. Any updates to the dataset site template files or assets should always be a major version update in both libraries.
