@@ -27,6 +27,7 @@ settings = OpenActive::DatasetSite::Settings.new(
   date_first_published: "2019-11-05",
   platform_name: "AcmeBooker",
   platform_url: "https://acmebooker.example.com/",
+  platform_software_version: "2.0.1",
   open_booking_api_base_url: "https://reference-implementation.openactive.io/api/openbooking",
   open_booking_api_authentication_authority_url: "https://auth.reference-implementation.openactive.io",
   open_booking_api_documentation_url: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
