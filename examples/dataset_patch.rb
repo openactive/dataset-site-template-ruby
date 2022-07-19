@@ -30,7 +30,7 @@ settings = OpenActive::DatasetSite::Settings.new(
 
 dataset = settings.to_dataset
 
-dataset.description = "Some better non-generated description here."
+dataset.description = "Some better non-generated description here"
 
 renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)
 

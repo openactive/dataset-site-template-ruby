@@ -25,6 +25,10 @@ module OpenActive
         dataset.to_json(schema: true, pretty: true)
       end
 
+      def staticAssetsPathUrl
+        ""
+      end
+
       def method_missing(orig_method_name, *args)
         method_name = orig_method_name.to_s.underscore
 
