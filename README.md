@@ -58,7 +58,7 @@ settings = OpenActive::DatasetSite::Settings.new(
     organisation_email: "info@better.org.uk",
     platform_name: "AcmeBooker",
     platform_url: "https://acmebooker.example.com/",
-    platform_software_version: "2.0",
+    platform_software_version: "2.0.1",
     background_image_url: "https://data.better.org.uk/images/bg.jpg",
     date_first_published: "2019-10-28",
     open_booking_api_base_url: "https://reference-implementation.openactive.io/api/openbooking",
@@ -202,6 +202,7 @@ dataset = OpenActive::Models::Dataset.new(
     OpenActive::Models::BookingService.new(
       name: "SimpleWeb Booking",
       url: "https://www.example.com/",
+      software_version: "2.0.0",
       has_credential: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
     )
 )

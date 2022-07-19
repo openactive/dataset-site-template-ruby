@@ -83,6 +83,7 @@ dataset = OpenActive::Models::Dataset.new(
     OpenActive::Models::BookingService.new(
       name: "SimpleWeb Booking",
       url: "https://www.example.com/",
+      software_version: "2.0.0",
       has_credential: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
     ),
 )
