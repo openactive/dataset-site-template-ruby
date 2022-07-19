@@ -267,7 +267,7 @@ And `data_feed_types` must be an array of `FeedType` constants, which auto-gener
 
 Accepts a [`settings`](#settings) or [`DataSet`](#dataset) object. This is a Mustache engine.
 
-If `static_assets_path_url` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/lib/openactive/dataset_site/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the Ruby gem. Note that `static_assets_path_url` must not have a trailing slash (/).
+If `static_assets_path_url` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/lib/openactive/dataset_site/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the Ruby gem.
 
 ##### .render
 

@@ -9,7 +9,7 @@ module OpenActive
         @settings = settings
         if static_assets_path_url.nil? then
           @template_file =  "#{__dir__}/datasetsite-csp.mustache"
-          @staticAssetsPathUrl = static_assets_path_url
+          @staticAssetsPathUrl = static_assets_path_url.chomp("/")
         else
           @template_file =  "#{__dir__}/datasetsite.mustache"
         end
