@@ -26,7 +26,7 @@ module OpenActive
       end
 
       def staticAssetsPathUrl
-        static_assets_path_url
+        @static_assets_path_url
       end
 
       def method_missing(orig_method_name, *args)
