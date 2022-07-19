@@ -129,17 +129,25 @@ module OpenActive
       def access_service
         return unless open_booking_api_base_url && !open_booking_api_base_url.empty?
         
-        OpenActive::Models::WebAPI.new(
+        access_service = OpenActive::Models::WebAPI.new(
           name: 'Open Booking API',
           description: webapi_description,
           documentation: open_booking_api_documentation_url,
-          terms_of_service: open_booking_api_terms_service_url,
           endpoint_url: open_booking_api_base_url,
-          authentication_authority: open_booking_api_authentication_authority_url,
           conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
           endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
           landing_page: open_booking_api_registration_url
         )
+
+        if (open_booking_api_authentication_authority_url_val = open_booking_api_authentication_authority_url)
+          access_service.authentication_authority = open_booking_api_authentication_authority_url_val
+        end
+
+        if (open_booking_api_terms_service_url_val = open_booking_api_terms_service_url)
+          access_service.terms_of_service = open_booking_api_terms_service_url_val
+        end
+
+        access_service
       end
 
       def to_dataset # rubocop:disable Metrics/MethodLength
