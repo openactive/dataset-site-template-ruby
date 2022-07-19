@@ -132,12 +132,16 @@ module OpenActive
         access_service = OpenActive::Models::WebAPI.new(
           name: 'Open Booking API',
           description: webapi_description,
-          documentation: open_booking_api_documentation_url,
+          documentation: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
           endpoint_url: open_booking_api_base_url,
           conforms_to: ["https://openactive.io/open-booking-api/EditorsDraft/"],
           endpoint_description: "https://www.openactive.io/open-booking-api/EditorsDraft/swagger.json",
           landing_page: open_booking_api_registration_url
         )
+
+        if (open_booking_api_documentation_url_val = open_booking_api_documentation_url)
+          access_service.documentation = open_booking_api_documentation_url_val
+        end
 
         if (open_booking_api_authentication_authority_url_val = open_booking_api_authentication_authority_url)
           access_service.authentication_authority = open_booking_api_authentication_authority_url_val
@@ -159,7 +163,7 @@ module OpenActive
           keywords: keywords,
           license: "https://creativecommons.org/licenses/by/4.0/",
           discussion_url: dataset_discussion_url,
-          documentation: dataset_documentation_url,
+          documentation: "https://permalink.openactive.io/dataset-site/open-data-documentation",
           in_language: dataset_languages,
           schema_version: "https://www.openactive.io/modelling-opportunity-data/2.0/",
           publisher: OpenActive::Models::Organization.new(
@@ -179,6 +183,10 @@ module OpenActive
           distribution: data_downloads,
           date_published: date_first_published,
         )
+
+        if (dataset_documentation_url_val = dataset_documentation_url)
+          dataset.documentation = dataset_documentation_url_val
+        end
 
         if (booking_service_val = booking_service)
           dataset.booking_service = booking_service_val
