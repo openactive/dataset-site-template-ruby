@@ -34,6 +34,14 @@ renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings)
 puts renderer.render
 ```
 
+Or to render a [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options), first ensure that you are serving the [CSP compatible static assets](/lib/openactive/dataset_site/datasetsite-csp.static.zip) from this version of the Ruby gem at a URL, and then including the following:
+```ruby
+
+# Render compiled CSP-compatible template with data
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings, "./path/to/styles")
+puts renderer.render
+```
+
 Where `settings` could be defined like the following (as an example):
 ```ruby
 settings = OpenActive::DatasetSite::Settings.new(
@@ -255,13 +263,15 @@ Accepts a config hash containing the following keys:
 
 And `data_feed_types` must be an array of `FeedType` constants, which auto-generates the metadata associated which each feed using best-practice values. See [available types](#feedtype)
 
-#### OpenActive::DatasetSite::TemplateRenderer.new(settings)
+#### OpenActive::DatasetSite::TemplateRenderer.new(settings, static_assets_path_url = nil)
 
-Accepts a settings or a DataSet object. This is a Mustache engine.
+Accepts a [`settings`](#settings) or [`DataSet`](#dataset) object. This is a Mustache engine.
+
+If `static_assets_path_url` is provided, the [CSP-compatible template](https://developer.openactive.io/publishing-data/dataset-sites#template-hosting-options) is rendered. In this case you must ensure that you are serving the contents of the [CSP compatible static assets archive](/lib/openactive/dataset_site/datasetsite-csp.static.zip) at this location, using the assets archive in this version of the Ruby gem.
 
 ##### .render
 
-Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, the provided [`settings`](#settings)
+Returns a string corresponding to the compiled HTML, based on the `datasetsite.mustache`, and the provided [`settings`](#settings) or [`DataSet`](#dataset) object
 
 #### `FeedType`
 
@@ -279,3 +289,9 @@ A class containing the supported distribution types:
 | `SCHEDULED_SESSION`       | `ScheduledSession`      |
 | `SESSION_SERIES`          | `SessionSeries`         |
 | `SLOT`                    | `Slot`                  |
+
+## Contribution
+
+### Release
+
+Major version numbers of this library should match those of the `dataset-site-template` on which this library depends. Any updates to the dataset site template files or assets should always be a major version update in both libraries.

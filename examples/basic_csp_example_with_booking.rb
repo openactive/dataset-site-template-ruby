@@ -25,13 +25,17 @@ settings = OpenActive::DatasetSite::Settings.new(
   organisation_email: "spam@simpleweb.co.uk",
   background_image_url: "https://simpleweb.co.uk/wp-content/uploads/2017/06/IMG_8994-500x500-c-default.jpg",
   date_first_published: "2019-11-05",
+  platform_name: "AcmeBooker",
+  platform_url: "https://acmebooker.example.com/",
+  open_booking_api_base_url: "https://reference-implementation.openactive.io/api/openbooking",
+  open_booking_api_authentication_authority_url: "https://auth.reference-implementation.openactive.io",
+  open_booking_api_documentation_url: "https://permalink.openactive.io/dataset-site/open-booking-api-documentation",
+  open_booking_api_terms_service_url: "https://example.com/api-terms-page",
+  open_booking_api_registration_url: "https://example.com/api-landing-page",
+  test_suite_certificate_url: "https://certificates.reference-implementation.openactive.io/examples/all-features/controlled/",
   data_feed_types: feed_types,
 )
 
-dataset = settings.to_dataset
-
-dataset.description = "Some better non-generated description here"
-
-renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset)
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings, "/example/local")
 
 puts renderer.render

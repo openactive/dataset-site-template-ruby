@@ -5,10 +5,14 @@ module OpenActive
     class TemplateRenderer < Mustache
       attr_reader :settings
 
-      self.template_file = "#{__dir__}/datasetsite.mustache"
-
-      def initialize(settings)
+      def initialize(settings, static_assets_path_url = nil)
         @settings = settings
+        if static_assets_path_url.nil? then
+          @template_file =  "#{__dir__}/datasetsite.mustache"
+        else
+          @template_file =  "#{__dir__}/datasetsite-csp.mustache"
+          @static_assets_path_url = static_assets_path_url.chomp("/")
+        end
       end
 
       def dataset
@@ -19,6 +23,10 @@ module OpenActive
 
       def jsonld
         dataset.to_json(schema: true, pretty: true)
+      end
+
+      def staticAssetsPathUrl
+        @static_assets_path_url
       end
 
       def method_missing(orig_method_name, *args)
