@@ -87,6 +87,6 @@ dataset = OpenActive::Models::Dataset.new(
     ),
 )
 
-renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset, "/example/local")
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(dataset, "./path/to/assets")
 
 puts renderer.render

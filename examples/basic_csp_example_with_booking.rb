@@ -36,6 +36,6 @@ settings = OpenActive::DatasetSite::Settings.new(
   data_feed_types: feed_types,
 )
 
-renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings, "/example/local")
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings, "./path/to/assets")
 
 puts renderer.render

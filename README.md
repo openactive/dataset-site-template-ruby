@@ -38,7 +38,7 @@ Or to render a [CSP-compatible template](https://developer.openactive.io/publish
 ```ruby
 
 # Render compiled CSP-compatible template with data
-renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings, "./path/to/styles")
+renderer = OpenActive::DatasetSite::TemplateRenderer.new(settings, "./path/to/assets")
 puts renderer.render
 ```
 
