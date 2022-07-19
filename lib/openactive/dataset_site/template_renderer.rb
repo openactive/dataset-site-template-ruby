@@ -11,7 +11,7 @@ module OpenActive
           @template_file =  "#{__dir__}/datasetsite.mustache"
         else
           @template_file =  "#{__dir__}/datasetsite-csp.mustache"
-          @staticAssetsPathUrl = static_assets_path_url.chomp("/")
+          @static_assets_path_url = static_assets_path_url.chomp("/")
         end
       end
 
@@ -26,7 +26,7 @@ module OpenActive
       end
 
       def staticAssetsPathUrl
-        ""
+        static_assets_path_url
       end
 
       def method_missing(orig_method_name, *args)
