@@ -1,5 +1,5 @@
 module OpenActive
   module DatasetSite
-    VERSION = "6.0.2".freeze
+    VERSION = "7.0.0".freeze
   end
 end
