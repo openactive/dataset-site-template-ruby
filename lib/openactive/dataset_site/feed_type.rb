@@ -18,6 +18,7 @@ module OpenActive
       new :EVENT, "Event" do
         @name = "Event"
         @same_as = "https://schema.org/Event"
+        @default_feed_path = "events"
         @possible_kinds = ["Event"]
         @display_name = "Events"
       end

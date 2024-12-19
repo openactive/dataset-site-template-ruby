@@ -15,7 +15,7 @@ jobs:
         ruby-version: ['2.7', '3.0', '3.1']
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -59,7 +59,7 @@ jobs:
       run: ruby examples/specific_feed_override_example2.rb > ./output/specific_feed_override_example2.html
 
     - name: Upload example renderings
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: ${{ success() || failure() }}
       with:
         name: example-rendering-ruby-${{ matrix.ruby-version }}
